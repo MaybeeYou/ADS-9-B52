@@ -1,11 +1,13 @@
+// Copyright 2022 NNTU-CS
 #include "tree.h"
 #include <iostream>
 #include <vector>
 #include <chrono>
 
 void printVector(const std::vector<char>& vec) {
-  for (char c : vec)
+  for (char c : vec) {
     std::cout << c;
+  }
   std::cout << std::endl;
 }
 
@@ -19,19 +21,20 @@ void runExample() {
     printVector(perm);
   }
 
-  std::cout << "\nGetting specific permutations:\n";
-  std::cout << "Method getPerm1 (full traversal):\n";
+  std::cout << "\nGet specific permutations:\n";
+
+  std::cout << "getPerm1 (full traversal):\n";
   for (int i = 1; i <= 6; ++i) {
-    auto perm = getPerm1(tree, i);
-    std::cout << "Permutation #" << i << ": ";
-    printVector(perm);
+    auto p = getPerm1(tree, i);
+    std::cout << " #" << i << ": ";
+    printVector(p);
   }
 
-  std::cout << "\nMethod getPerm2 (tree navigation):\n";
+  std::cout << "\ngetPerm2 (tree nav):\n";
   for (int i = 1; i <= 6; ++i) {
-    auto perm = getPerm2(tree, i);
-    std::cout << "Permutation #" << i << ": ";
-    printVector(perm);
+    auto p = getPerm2(tree, i);
+    std::cout << " #" << i << ": ";
+    printVector(p);
   }
 }
 
@@ -42,32 +45,33 @@ void runExperiment() {
   std::cout << "\nPerformance measurements:\n";
 
   auto start = std::chrono::high_resolution_clock::now();
-  auto perms = tree.getAllPerms();  
+  auto perms = tree.getAllPerms();
   auto end = std::chrono::high_resolution_clock::now();
-  auto duration_all = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
-  std::cout << "Execution time for getAllPerms(): " << duration_all.count() << " µs\n";
-
+  auto dur_all = std::chrono::duration_cast<std::chrono::microseconds>(
+    end - start).count();
+  std::cout << "getAllPerms(): " << dur_all << " µs\n";
 
   start = std::chrono::high_resolution_clock::now();
   for (int i = 1; i <= 6; ++i) {
-    getPerm1(tree, i);  
+    getPerm1(tree, i);
   }
   end = std::chrono::high_resolution_clock::now();
-  auto duration_p1 = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
-  std::cout << "Execution time for getPerm1():     " << duration_p1.count() << " µs\n";
+  auto dur_p1 = std::chrono::duration_cast<std::chrono::microseconds>(
+    end - start).count();
+  std::cout << "getPerm1():     " << dur_p1 << " µs\n";
 
   start = std::chrono::high_resolution_clock::now();
   for (int i = 1; i <= 6; ++i) {
     getPerm2(tree, i);
   }
   end = std::chrono::high_resolution_clock::now();
-  auto duration_p2 = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
-  std::cout << "Execution time for getPerm2():     " << duration_p2.count() << " µs\n";
+  auto dur_p2 = std::chrono::duration_cast<std::chrono::microseconds>(
+    end - start).count();
+  std::cout << "getPerm2():     " << dur_p2 << " µs\n";
 }
 
 int main() {
-  runExample();     
-  runExperiment();   
-
+  runExample();
+  runExperiment();
   return 0;
 }
