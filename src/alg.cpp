@@ -26,7 +26,7 @@ bool findNthPath(PMNode* node, std::vector<char>& path,
   path.push_back(node->value);
 
   if (node->children.empty()) {
-    if (current == target){
+    if (current == target) {
       return true;
     } else {
       current++;
