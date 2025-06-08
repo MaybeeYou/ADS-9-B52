@@ -51,8 +51,7 @@ class PMTree {
 
     if (node->children.empty()) {
       result.push_back(path);
-    }
-    else {
+    } else {
       int n = node->children.size();
       for (int i = 0; i < n; ++i) {
         collect(node->children[i], path, result);
@@ -61,6 +60,7 @@ class PMTree {
 
     path.pop_back();
   }
+
  public:
    explicit PMTree(const std::vector<char>& chars) : root(new PMNode('*')) {
      if (chars.empty()) return;
@@ -81,7 +81,7 @@ class PMTree {
      delete root;
    }
 
-   std::vector<std::vector<char>> getAllPerms() const {
+  std::vector<std::vector<char>> getAllPerms() const {
      std::vector<std::vector<char>> result;
      std::vector<char> path;
 
@@ -91,9 +91,9 @@ class PMTree {
      }
 
      return result;
-   }
+  }
 
-   PMNode* getRoot() const { return root; }
+PMNode* getRoot() const { return root; }
 };
 
 std::vector<std::vector<char>> getAllPerms(const PMTree& tree);
