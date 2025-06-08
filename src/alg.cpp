@@ -1,5 +1,7 @@
-#include "tree.h"
+// Copyright 2022 NNTU-CS
 #include <vector>
+#include "tree.h"
+
 
 std::vector<std::vector<char>> getAllPerms(const PMTree& tree) {
   return tree.getAllPerms();
@@ -19,13 +21,14 @@ std::vector<char> getPerm1(const PMTree& tree, int num) {
   return all[num - 1];
 }
 
-bool findNthPath(PMNode* node, std::vector<char>& path, int target, int& current) {
+bool findNthPath(PMNode* node, std::vector<char>& path,
+  int target, int& current) {
   path.push_back(node->value);
 
   if (node->children.empty()) {
-    if (current == target)
+    if (current == target){
       return true;
-    else {
+    } else {
       current++;
       path.pop_back();
       return false;
