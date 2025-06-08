@@ -62,7 +62,7 @@ class PMTree {
   }
 
  public:
-   explicit PMTree(const std::vector<char>& chars) : root(new PMNode('*')) {
+  explicit PMTree(const std::vector<char>& chars) : root(new PMNode('*')) {
      if (chars.empty()) return;
 
      std::vector<char> sorted = chars;
@@ -74,12 +74,12 @@ class PMTree {
        root->children.push_back(child);
        build(child, remove(&sorted, sorted[i]));
      }
-   }
+  }
 
-   ~PMTree() {
+  ~PMTree() {
      clear(root);
      delete root;
-   }
+  }
 
   std::vector<std::vector<char>> getAllPerms() const {
      std::vector<std::vector<char>> result;
